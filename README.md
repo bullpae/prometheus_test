@@ -4,7 +4,7 @@
 
 Rocky Linux에서 podman-compose를 설치하는 방법은 다음과 같습니다. Podman은 Docker와 호환되는 오픈소스 컨테이너 엔진으로, 특히 루트리스 모드에서 작동할 수 있어 보안이 강화됩니다. podman-compose는 Podman을 사용하여 Docker Compose와 유사한 기능을 제공합니다.
 
-### 1. Podman 설치
+### 1. Podman 설치(docker 대용)
 
 패키지 업데이트:
 
@@ -18,13 +18,14 @@ Podman 설치:
 sudo dnf install -y podman
 ```
 
-Podman 버전 확인:
+Podman 버전 확인(docker 명령과 호환):
 
 ```bash
 podman --version
+docker --version
 ```
 
-### 2. Podman-Compose 설치
+### 2. Podman-Compose 설치(docker-compose 대용)
 
 pip 설치 (pip는 Python 패키지 관리 도구):
 
@@ -38,10 +39,17 @@ Podman-Compose 설치:
 sudo pip3 install podman-compose
 ```
 
+docker-compse 링크 생성:
+
+```bash
+sudo ln -s /usr/local/bin/podman-compose /usr/bin/docker-compose
+```
+
 Podman-Compose 버전 확인:
 
 ```bash
 podman-compose --version
+docker-compose --version
 ```
 
 ## Run Prometheus
