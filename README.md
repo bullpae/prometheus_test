@@ -60,12 +60,16 @@ Podman-Compose 실행:
 
 ```bash
 podman-compose up -d
+or
+docker-compose up -d
 ```
 
 Container 실행 확인:
 
 ```bash
 podman-compose ps -a
+or
+docker-compose ps -a
 ```
 
 ## Permission deny 에러 해결책
