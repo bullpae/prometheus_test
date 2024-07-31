@@ -72,6 +72,14 @@ or
 docker-compose ps -a
 ```
 
+### Prometheus 실행 확인
+
+웹 브라우져에서 URL 입력:
+
+```
+http://{서버IP}:9090/
+```
+![alt text](image.png)
 ## Permission deny 에러 해결책
 
 ### 1. Check File Permissions and Ownership
