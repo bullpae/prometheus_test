@@ -44,32 +44,9 @@ Podman-Compose 버전 확인:
 podman-compose --version
 ```
 
-### 3. 기본 Podman-Compose 예제
-Podman-Compose를 사용하여 간단한 애플리케이션을 실행하는 예제
+## Run Prometheus
 
-디렉토리 생성 및 이동:
-
-```bash
-mkdir my_podman_app
-cd my_podman_app
-```
-
-docker-compose.yml 파일 생성:
-
-```bash
-touch docker-compose.yml
-```
-
-docker-compose.yml 파일 내용 작성 (예: 간단한 웹 서버):
-
-```yaml
-version: '3'
-services:
-  web:
-    image: nginx:latest
-    ports:
-      - "80:80"
-```
+### Podman-compose 실행
 
 Podman-Compose 실행:
 
@@ -86,45 +63,36 @@ podman-compose ps -a
 ## Permission deny 에러 해결책
 
 ### 1. Check File Permissions and Ownership
-Ensure that the prometheus.yml file has the correct permissions and ownership on the host machine. The Docker container needs to have read access to this file.
-
-File Permissions: Ensure that the file permissions are set such that the Docker container can read the file. You can use the following command to make sure the file is readable:
+파일 권한 변경:
 
 ```bash
 chmod 644 prometheus.yml
 ```
 
-File Ownership: Ensure that the file is owned by the user running Docker, typically vagrant in your case. Check ownership with:
+파일 사용자/그룹 변경(필요 시):
 
 ```bash
 ls -l prometheus.yml
-If necessary, adjust ownership:
 ```
 
 ```bash
 chown vagrant:vagrant prometheus.yml
 ```
 
-### 2. Adjust Docker Compose Volumes
-Verify that the volume mapping in your docker-compose.yml is correct. Ensure that the path ./prometheus.yml is correctly referenced.
+### 2. SELinux Context (If Applicable)
 
-### 3. SELinux Context (If Applicable)
-If you're running on a system with SELinux enabled (such as CentOS or RHEL), you might need to adjust the SELinux context for the file:
+SELinux는 Security Enhanced Linux의 약자로, 리눅스 보안 시스템 아키텍처의 하나로 시스템 액세스 권한을 제어하는 역할을 합니다. SELinux를 사용하면 시스템 보안에 영향을 미치는 기능이 감지되면 그 기능을 작동하지 않도록 막거나, 허용은 하되 그 내용을 로그에 남기는 등의 설정을 할 수 있습니다. 예를 들어, SELinux를 사용하면 루트 권한이 할당된 프로세스가 연결된 정책에 지정된 기기에만 쓸 수 있도록 제한할 수 있음.
+
+실제 이 명령만 실행하면 끝:
 
 ```bash
 chcon -Rt svirt_sandbox_file_t prometheus.yml
 ```
 
-### 4. Verify Docker Permissions
-Make sure that Docker has permission to access the directory and file. Sometimes, Docker may have issues accessing files due to its permissions or the context in which it is running.
-
-### 5. Restart Docker Compose
-After making the necessary adjustments, restart your Docker Compose setup:
+### 3. Restart Docker Compose
+위 설정 후 실행:
 
 ```bash
 docker-compose down
 docker-compose up
 ```
-
-### Summary
-By adjusting file permissions and ownership, and ensuring Docker has the correct access, you should resolve the permission denied error.
