@@ -9,6 +9,7 @@ flowchart LR
 
 S/W
 ```mermaid
+flowchart LR
     C[Prometheus] -->|Pulling| D[Node Exporter]
 
     E[Grafana] -->|Connection| C
