@@ -189,7 +189,7 @@ Create dashboard - Import dashboard :
 
 ![alt text](./images/image-9.png)
 
-Load [Node Exporter Full](https://grafana.com/grafana/dashboards/1860-node-exporter-full/) :
+Load [Node Exporter Full](https://grafana.com/grafana/dashboards/1860-node-exporter-full/) : 1860
 
 ![alt text](./images/image-10.png)
 
