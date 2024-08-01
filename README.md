@@ -4,15 +4,20 @@
 H/W
 ```mermaid
 flowchart LR
-      A[fa:fa-laptop My Notebook fa:fa-windows] -->|Monitoring| B[fa:fa-server VM Server fa:fa-linux]
+      A[fa:fa-laptop My Notebook-Windows 10] -->|Monitoring| B[fa:fa-server VM Server-rockylinux 9]
+
+      
 ```
 
-S/W
+S/W 
 ```mermaid
 flowchart LR
-    C[fa:fa-list-ol Prometheus] -->|Pulling| D[fa:fa-linode Node Exporter]
+    C[fa:fa-list-ol Prometheus:9090] -->|Pulling| D[fa:fa-linode Node Exporter:9100]
 
-    E[fa:fa-line-chart Grafana] -->|Connection| C
+    E[fa:fa-line-chart Grafana:3000] -->|Connection| C
+
+    F[Browser] -->|http| C
+    F[Browser] -->|http| E
 ```
 
 ## Install Podman & Podman-compse 
