@@ -1,8 +1,22 @@
 # prometheus_test
 
+## 테스트 환경
+H/W
+```mermaid
+flowchart LR
+    A[My Notebook] -->|Monitoring| B[VM Server]
+```
+
+S/W
+```mermaid
+    C[Prometheus] -->|Pulling| D[Node Exporter]
+
+    E[Grafana] -->|Connection| C
+```
+
 ## Install Podman & Podman-compse 
 
-Rocky Linux에서 podman-compose를 설치하는 방법은 다음과 같습니다. Podman은 Docker와 호환되는 오픈소스 컨테이너 엔진으로, 특히 루트리스 모드에서 작동할 수 있어 보안이 강화됩니다. podman-compose는 Podman을 사용하여 Docker Compose와 유사한 기능을 제공합니다.
+Rocky Linux에서 podman-compose를 설치하는 방법은 다음과 같습니다. Podman은 Docker와 호환되는 오픈소스 컨테이너 엔진으로, 특히 루트리스 모드에서 작동할 수 있어 보안이 강화됩니다. podman-compose는 Podman을 사용하여 Docker Compose와 유사한 기능을 제공함.
 
 ### 1. Podman 설치(docker 대용)
 
@@ -79,7 +93,11 @@ docker-compose ps -a
 ```
 http://{서버IP}:9090/
 ```
-![alt text](image.png)
+기본 화면
+![alt text](./images/image.png)
+
+Status - Targets 화면
+![alt text](./images/image-1.png)
 ## Permission deny 에러 해결책
 
 ### 1. Check File Permissions and Ownership
@@ -116,3 +134,63 @@ chcon -Rt svirt_sandbox_file_t prometheus.yml
 docker-compose down
 docker-compose up
 ```
+
+## Granfana 연결
+
+### Granfana 실행 확인
+
+웹 브라우져에서 URL 입력:
+
+```
+http://{서버IP}:3000/
+```
+로그인 화면:
+
+![alt text](./images/image-2.png)
+
+패스워드 변경 화면 : skip or change
+
+![alt text](./images/image-3.png)
+
+### Data source 추가
+
+Open Menu - Data Sources : 
+
+![alt text](./images/image-4.png)
+
+Add Data Source : 
+
+![alt text](./images/image-5.png)
+
+### Prometheus 설정
+
+Input Connection : http://{서버 IP}:9090
+
+![alt text](./images/image-6.png)
+
+Save & test :
+
+![alt text](./images/image-7.png)
+
+### Dashboard 추가
+
+Open Menu - Dashboard :
+
+![alt text](./images/image-8.png)
+
+
+Create dashboard - Import dashboard :
+
+![alt text](./images/image-9.png)
+
+Load [Node Exporter Full](https://grafana.com/grafana/dashboards/1860-node-exporter-full/) :
+
+![alt text](./images/image-10.png)
+
+Import Data source : Prometheus
+
+![alt text](./images/image-11.png)
+
+Monitoring Node :
+
+![alt text](./images/image-12.png)
