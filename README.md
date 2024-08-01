@@ -4,15 +4,15 @@
 H/W
 ```mermaid
 flowchart LR
-    A[My Notebook] -->|Monitoring| B[VM Server]
+      A[fa:fa-laptop My Notebook fa:fa-windows] -->|Monitoring| B[fa:fa-server VM Server fa:fa-linux]
 ```
 
 S/W
 ```mermaid
 flowchart LR
-    C[Prometheus] -->|Pulling| D[Node Exporter]
+    C[fa:fa-list-ol Prometheus] -->|Pulling| D[fa:fa-linode Node Exporter]
 
-    E[Grafana] -->|Connection| C
+    E[fa:fa-line-chart Grafana] -->|Connection| C
 ```
 
 ## Install Podman & Podman-compse 
